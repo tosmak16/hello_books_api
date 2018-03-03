@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    image: "postgres:9.6.5"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    env_file:
+      - .env
+    networks:
+      - db_nw
+  hellobooks_app:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/hellobooks
+    networks:
+      - db_nw
+      - web_nw
+    depends_on:
+      - postgres
+  nginx:
+    image: "nginx:1.13.5"
+    ports:
+      - "5000:80"
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    networks:
+      - web_nw
+    depends_on: 
+      - hellobooks_app
+networks:
+  db_nw:
+    driver: bridge
+  web_nw:
+    driver: bridge
+volumes:
+  dbdata:
