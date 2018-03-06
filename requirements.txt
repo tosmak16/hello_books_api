@@ -6,3 +6,5 @@ Flask-SQLAlchemy==2.2
 psycopg2
 SQLAlchemy
 Flask-WTF
+Flask-Migrate
+flask-script

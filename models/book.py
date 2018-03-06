@@ -1,21 +1,19 @@
-from database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Text
-from sqlalchemy.types import DateTime
-from sqlalchemy.orm import relationship
-from database import db_session
+from flask_sqlalchemy import SQLAlchemy
+from db import db
 
-class BookModel(Base):
+
+class BookModel(db.Model):
     __tablename__ = 'books'
 
-    id = Column(Integer, primary_key=True)
-    title = Column(String(80), nullable=False,)
-    author = Column(String(80), nullable=False)
-    isbn = Column(Integer, nullable=False, unique=True)
-    description = Column(Text, nullable=False)
-    image = Column(String(100), nullable=True)
-    file = Column(String(100), nullable=True)
-    category = Column(String(80), nullable=False)
-    borrowedbooks = relationship('BorrowedBooksModel', lazy='dynamic')
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False,)
+    author = db.Column(db.String(100), nullable=False)
+    isbn = db.Column(db.Integer, nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(100), nullable=True)
+    file = db.Column(db.String(100), nullable=True)
+    category = db.Column(db.String(80), nullable=False)
+    borrowedbooks = db.relationship('BorrowedBooksModel')
 
     def __init__(self, **kwargs):
         self.title = kwargs['title']
@@ -28,10 +26,11 @@ class BookModel(Base):
 
     def json(self):
         return {
-                'title': self.title, 'author': self.author, 'image': self.image,
-                'category': self.category, 'isbn': self.isbn, 'file': self.file,
-                'description': self.description, 'id': self.id
-                }
+            'title': self.title, 'author': self.author, 'image': self.image,
+            'category': self.category, 'isbn': self.isbn, 'file': self.file,
+            'description': self.description, 'id': self.id,
+            'borrowedbooks': [borrowedbook.json() for borrowedbook in self.borrowedbooks.all()]
+        }
 
     @classmethod
     def find_by_isbn(cls, isbn):
@@ -42,9 +41,9 @@ class BookModel(Base):
         return cls.query.get(id)
 
     def save_book(self):
-        db_session.add(self)
-        db_session.commit()
+        db.session.add(self)
+        db.session.commit()
 
     def delete_book(self):
-        db_session.delete(self)
-        db_session.commit()
+        db.session.delete(self)
+        db.session.commit()
