@@ -1,18 +1,16 @@
-from database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.types import DateTime
-from database import db_session
+from db import db
 
-class BorrowedBooksModel(Base):
+
+class BorrowedBooksModel(db.Model):
 
     __tablename__ = 'borrowedbooks'
 
-    id = Column(Integer, primary_key=True)
-    borrowed_date = Column(Integer, nullable=False)
-    returned_date = Column(Integer, nullable=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    book_id = Column(Integer, ForeignKey('books.id'), nullable=False)
-    book_status = Column(Boolean, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    borrowed_date = db.Column(db.Integer, nullable=False)
+    returned_date = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
+    book_status = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, **kwargs):
         self.borrowed_date = kwargs['borrowed_date']
@@ -46,9 +44,9 @@ class BorrowedBooksModel(Base):
         return cls.query.filter_by(user_id=user_id, book_id=book_id, book_status=False).first()
 
     def save_to_db(self):
-        db_session.add(self)
-        db_session.commit()
+        db.session.add(self)
+        db.session.commit()
 
     def delete_from_db(self):
-        db_session.delete(self)
-        db_session.commit()
+        db.session.delete(self)
+        db.session.commit()

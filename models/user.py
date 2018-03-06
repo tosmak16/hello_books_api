@@ -1,19 +1,14 @@
-from database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.types import DateTime
-from sqlalchemy.orm import relationship
-from database import db_session
+from db import db
 
 
-
-class UserModel(Base):
+class UserModel(db.Model):
 
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    username = Column(String(80), nullable=False)
-    password = Column(String(80), nullable=False)
-    borrowedbooks = relationship('BorrowedBooksModel', lazy='dynamic')
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
+    borrowedbooks = db.relationship('BorrowedBooksModel')
 
     def __init__(self, **kwargs):
         self.username = kwargs['username']
@@ -33,5 +28,5 @@ class UserModel(Base):
         return cls.query.get(id)
 
     def save_to_db(self):
-        db_session.add(self)
-        db_session.commit()
+        db.session.add(self)
+        db.session.commit()
