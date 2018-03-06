@@ -7,20 +7,20 @@ from resources.book import Books, SingleBook
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from db import db
+from instance.config import app_config
 
 migrate = Migrate()
 
 
-def create_app():
+def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
 
     api = Api(app)
-    app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
+    app.config.from_object(app_config[config_name])
+    app.config.from_pyfile('config.py')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     migrate.init_app(app, db)
-    print(environ['DATABASE_URI'])
 
     @app.before_first_request
     def create_tables():

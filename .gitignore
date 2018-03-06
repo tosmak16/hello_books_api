@@ -1,0 +1,5 @@
+__pycache__/
+.idea/
+hello_books_env/
+db.pyc
+.env
