@@ -4,7 +4,10 @@ Flask-RESTful==0.3.6
 gunicorn==19.4.5
 Flask-SQLAlchemy==2.2
 psycopg2
-SQLAlchemy
 Flask-WTF
 Flask-Migrate
 flask-script
+pytest
+coverage
+pytest-cov
+nose

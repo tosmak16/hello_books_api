@@ -3,3 +3,7 @@ __pycache__/
 hello_books_env/
 db.pyc
 .env
+.tox
+.coverage
+.pytest_cache
+htmlcov
