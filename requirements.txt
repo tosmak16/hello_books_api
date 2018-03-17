@@ -10,4 +10,4 @@ flask-script
 pytest
 coverage
 pytest-cov
-nose
+python-coveralls
