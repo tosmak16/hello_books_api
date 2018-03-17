@@ -9,3 +9,5 @@ before_script:
   - psql -c 'create database hello_test_db;' -U postgres
 script:
   - pytest -v --cov-config=.coveragerc --cov    
+after_success:
+  - coveralls
