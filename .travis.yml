@@ -1,0 +1,11 @@
+language: python
+python: 
+  - "3.6"
+services:
+  - postgresql
+install: "pip install -r requirements.txt"  
+before_script:
+  - psql -c 'drop database if exists hello_test_db;' -U postgres
+  - psql -c 'create database hello_test_db;' -U postgres
+script:
+  - pytest -v --cov-config=.coveragerc --cov    
