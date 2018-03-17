@@ -1,2 +1,7 @@
 [run]
 omit = hello_books_env/*
+       home/travis/virtualenv/*
+       */virtualenv/*
+       */virtualenv/
+       */virtualenv
+
