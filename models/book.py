@@ -16,13 +16,13 @@ class BookModel(db.Model):
     borrowedbooks = db.relationship('BorrowedBooksModel')
 
     def __init__(self, **kwargs):
-        self.title = kwargs['title']
-        self.author = kwargs['author']
-        self.isbn = kwargs['isbn']
-        self.description = kwargs['description']
-        self.image = kwargs['image']
-        self.file = kwargs['file']
-        self.category = kwargs['category']
+        self.title = kwargs.get('title')
+        self.author = kwargs.get('author')
+        self.isbn = kwargs.get('isbn')
+        self.description = kwargs.get('description')
+        self.image = kwargs.get('image')
+        self.file = kwargs.get('file')
+        self.category = kwargs.get('category')
 
     def json(self):
         return {
