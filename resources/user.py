@@ -1,38 +1,45 @@
-from flask_restful import Resource, reqparse
-from models.user import UserModel
+from flask_restful import Resource, request
+from models.user import UserModel, UserSchema
 
 
 class UserRegister(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('username', type=str, required=True, help="username is required")
-    parser.add_argument('password', type=str, required=True, help='password is required')
-    parser.add_argument('email', type=str, required=True, help='email is required')
-    parser.add_argument('name', type=str, required=True, help='name is required')
 
     @staticmethod
     def post():
-        user_data = UserRegister.parser.parse_args()
-        user_result = UserModel.find_by_name(user_data['username'])
+        user_schema=UserSchema()
+        user_data = request.get_json()
 
-        if user_result:
-            return {'message': 'username already exist'}, 400
+        error = user_schema.validate(user_data)
+        if error:
+            return {'status': 'fail','message': error}, 400
+        username_exist = UserModel.filter_and_find_first(username=user_data['username'])
+        if username_exist:
+            return {'status': 'fail', 'message': 'username already exist'}, 409
+
+        email_exist = UserModel.filter_and_find_first(email=user_data['email'])
+        if email_exist:
+            return {'status':'fail', 'message': 'email already exist'}, 409
 
         new_user = UserModel(**user_data)
         new_user.save_to_db()
-        return new_user.json(), 201
+        new_user_json = user_schema.dump(new_user).data
+        return {'status': 'success', 'data': new_user_json}, 201
 
     @staticmethod
     def put():
-        user_data = UserRegister.parser.parse_args()
-        user_result = UserModel.find_by_name(user_data['username'])
+        user_schema=UserSchema(partial={'password'})
+        user_data = request.get_json()
+        error = user_schema.validate(user_data)
+        if error:
+            return {'status': 'fail','message': error}, 400
+        user_result = UserModel.filter_and_find_first(username=user_data['username'])
 
         if user_result:
             user_result.email = user_data['email']
             user_result.name = user_data['name']
             user_result.save_to_db()
-            return user_result.json(), 200
+            new_user_json = user_schema.dump(user_result).data
+            return {'status': 'success', 'data': new_user_json}, 200
+        return {'status': 'fail', 'message': 'user does not exist'}, 404
 
-        new_user = UserModel(**user_data)
-        new_user.save_to_db()
-        return new_user.json(), 201
 

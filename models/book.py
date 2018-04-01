@@ -1,5 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 from db import db
+from marshmallow import Schema, fields, validate, validates, ValidationError
 
 
 class BookModel(db.Model):
@@ -8,12 +8,11 @@ class BookModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False,)
     author = db.Column(db.String(100), nullable=False)
-    isbn = db.Column(db.Integer, nullable=False, unique=True)
+    isbn = db.Column(db.String(13), nullable=False, unique=True)
     description = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(100), nullable=True)
     file = db.Column(db.String(100), nullable=True)
     category = db.Column(db.String(80), nullable=False)
-    borrowedbooks = db.relationship('BorrowedBooksModel')
 
     def __init__(self, **kwargs):
         self.title = kwargs.get('title')
@@ -23,14 +22,6 @@ class BookModel(db.Model):
         self.image = kwargs.get('image')
         self.file = kwargs.get('file')
         self.category = kwargs.get('category')
-
-    def json(self):
-        return {
-            'title': self.title, 'author': self.author, 'image': self.image,
-            'category': self.category, 'isbn': self.isbn, 'file': self.file,
-            'description': self.description, 'id': self.id,
-            'borrowedbooks': [borrowedbook.json() for borrowedbook in self.borrowedbooks.all()]
-        }
 
     @classmethod
     def find_by_isbn(cls, isbn):
@@ -47,3 +38,27 @@ class BookModel(db.Model):
     def delete_book(self):
         db.session.delete(self)
         db.session.commit()
+
+
+class BookSchema(Schema):
+    id = fields.Integer()
+    title = fields.String(required=True, error_messages={'required': 'book title is required'})
+    author = fields.String(required=True, error_messages={'required': 'author is required'})
+    isbn = fields.String(required=True, error_messages={'required': 'isbn is required'})
+    description = fields.String(required=True, error_messages={'required':'description is required'})
+    image = fields.Url(validate=validate.URL(error='image must be a valid url'))
+    file = fields.Url(validate=validate.URL(error='file must be a valid url'))
+    category = fields.String(required=True, error_messages={'required': 'category is required'},
+                             validate=[validate.Length(min=1, max=25,
+                                                       error='book category should be in the range of 1 and 25')])
+
+    @validates('isbn')
+    def validate_isbn(self, data):
+        try:
+            int(data)
+        except ValueError:
+            raise ValidationError('isbn must be a number only')
+
+        if len(data) > 13 or len(data) < 10:
+            raise ValidationError('isbn should be in the range of 10 and 13')
+
