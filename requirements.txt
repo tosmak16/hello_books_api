@@ -1,8 +1,7 @@
-Flask==0.10.1
-Flask-RESTful==0.3.6
-# Application server for both development and production.
+Flask
+Flask-RESTful
 gunicorn==19.4.5
-Flask-SQLAlchemy==2.2
+Flask-SQLAlchemy
 psycopg2
 Flask-WTF
 Flask-Migrate
@@ -11,3 +10,4 @@ pytest
 coverage
 pytest-cov
 python-coveralls
+marshmallow

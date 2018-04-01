@@ -1,18 +1,18 @@
 from flask import Flask
 from flask_restful import Api
-from os import environ
 from resources.user import UserRegister
 from resources.borrowedbook import BorrowedBooks, BorrowedBooksList
 from resources.book import Books, SingleBook
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from db import db
 from instance.config import app_config
+
 
 migrate = Migrate()
 
 
 def create_app(config_name):
+
     app = Flask(__name__, instance_relative_config=True)
 
     api = Api(app)
