@@ -11,3 +11,4 @@ coverage
 pytest-cov
 python-coveralls
 marshmallow
+pyjwt

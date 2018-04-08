@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from resources.user import UserRegister
+from resources.user import UserRegister, UserLogin
 from resources.borrowedbook import BorrowedBooks, BorrowedBooksList
 from resources.book import Books, SingleBook
 from flask_migrate import Migrate
@@ -29,6 +29,7 @@ def create_app(config_name):
     api.add_resource(SingleBook, '/api/v1/books/<string:id>')
     api.add_resource(Books, '/api/v1/books')
     api.add_resource(UserRegister, '/api/v1/signup')
+    api.add_resource(UserLogin, '/api/v1/signin')
     api.add_resource(BorrowedBooksList, '/api/v1/borrowedbooks')
     api.add_resource(BorrowedBooks, '/api/v1/users/<string:user_id>/books')
 

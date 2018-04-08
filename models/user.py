@@ -14,7 +14,7 @@ class UserModel(db.Model):
 
     def __init__(self, **kwargs):
         self.username = kwargs['username']
-        self.password = kwargs['password']
+        self.password = kwargs['password'].encode('utf-8')
         self.email = kwargs['email']
         self.name = kwargs['name']
 

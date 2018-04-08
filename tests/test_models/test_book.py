@@ -1,7 +1,6 @@
 from ..test_base import HelloBooksTestCase
-from app import create_app, db
 from models.book import BookModel
-import pytest
+
 
 
 class BooksTestCase(HelloBooksTestCase):
