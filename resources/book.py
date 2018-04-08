@@ -1,10 +1,13 @@
 from flask_restful import Resource, request
 from models.book import BookModel, BookSchema
+from .helpers.validate_user_token import validate_user_token
+
 
 
 class Books(Resource):
 
     @staticmethod
+    @validate_user_token
     def post():
         request_body = request.get_json()
         book_schema = BookSchema()
@@ -22,6 +25,7 @@ class Books(Resource):
         return {'status': 'success', 'book': book_data}, 201
 
     @staticmethod
+    @validate_user_token
     def get():
         books = BookModel.query.all()
         book_schema = BookSchema(many=True)
@@ -32,11 +36,13 @@ class Books(Resource):
 class SingleBook(Resource):
 
     @staticmethod
+    @validate_user_token
     def validate_book_id(id):
         book_schema = BookSchema(partial=True)
         return book_schema.validate(dict(id=id), partial=True)
 
     @staticmethod
+    @validate_user_token
     def get(id):
         book_schema = BookSchema(partial=True)
         is_not_valid = SingleBook.validate_book_id(id)
@@ -49,6 +55,7 @@ class SingleBook(Resource):
         return {'status': 'fail', 'message': 'book does not exist'}, 404
 
     @staticmethod
+    @validate_user_token
     def put(id):
         request_body = request.get_json()
         book_schema = BookSchema()
@@ -74,6 +81,7 @@ class SingleBook(Resource):
         return {'message': 'book does not exist'}, 404
 
     @staticmethod
+    @validate_user_token
     def delete(id):
         is_not_valid = SingleBook.validate_book_id(id)
         if is_not_valid:

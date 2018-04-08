@@ -3,12 +3,14 @@ from datetime import datetime
 from models.borrowedbook import BorrowedBooksModel, BorrowedBooksSchema
 from models.book import BookModel
 from models.user import UserModel
+from .helpers.validate_user_token import validate_user_token
 
 
 class BorrowedBooks(Resource):
 
     # handles user borrow books request
     @staticmethod
+    @validate_user_token
     def post(user_id):
         borrowed_book_data = request.get_json()
         borrowed_book_schema = BorrowedBooksSchema(partial=('borrowed_date', 'returned_date', 'book_status',))
@@ -37,6 +39,7 @@ class BorrowedBooks(Resource):
         return {'status': 'success', 'data': new_borrowed_book_data_json}, 201
 
     @staticmethod
+    @validate_user_token
     def get(user_id):
             returned = request.args.get('returned')
             borrowed_book_schema = BorrowedBooksSchema(partial=('borrowed_date', 'book_id',
@@ -57,6 +60,7 @@ class BorrowedBooks(Resource):
 
     # handles return borrow books request
     @staticmethod
+    @validate_user_token
     def put(user_id):
         borrowed_book_data = request.get_json()
         borrowed_book_schema = BorrowedBooksSchema(partial=('borrowed_date', 'returned_date', 'book_status',))
@@ -82,6 +86,7 @@ class BorrowedBooks(Resource):
 class BorrowedBooksList(Resource):
 
     @staticmethod
+    @validate_user_token
     def get():
         all_borrowed_books=BorrowedBooksModel.fetch_all()
         all_borrowed_books_json = BorrowedBooksSchema(many=True, exclude=()) \
