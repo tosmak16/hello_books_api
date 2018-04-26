@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>User Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+</head>
+
+<body style="background-color: wheat">
+    <div class="navbar-fixed">
+        <nav style="background-color: #3d1112">
+            <div class="nav-wrapper">
+                <div>
+                    <a id="hello" class="brand-logo" href="#"><i  class="material-icons left"> collections<span> <i id="menu-toggle" class="material-icons left">menu</i></i></span>HelloBooks</a>
+                </div>
+                <div>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a id="navitem1" href="books.html" style="color:wheat">Catalog</a></li>
+                        <li><a href="dashboard.html" style="color:wheat"><i  class="material-icons left">account_circle</i>user@gmail.com</a></li>
+                        <li><a href="index.html" style="color:wheat"><i class="material-icons left">exit_to_app</i> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav ">
+                <li style="margin-top: 20px">
+                    <div class="container">
+                        <div class="row">
+                            <div id="imageborder">
+                                <img id="userimg" src="img/userimg.jpg" width="120" height="120" alt="images">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a id="dash" href="#">
+                       <i class="material-icons left">local_library</i> Books Shelf
+                    </a>
+                </li>
+                <li>
+                    <a id="myP" href="#"><i class="material-icons left">dashboard</i>Account</a>
+                </li>
+                <li>
+                    <a id="bor" href="#"><i class="material-icons left">data_usage</i>History</a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons left">lock</i>Change Password</a>
+                </li>
+                <li>
+                    <a href="index.html"><i class="material-icons left">exit_to_app</i>Logout</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class=" col l12 col m10 col s9">
+                        <h3 class="sub-header"> Borrowed books</h3>
+                        <div class="responsive-table">
+                            <table class="table responsive-table bordered highlight striped">
+                                <thead>
+                                    <tr>
+                                        <th><span class="glyphicon glyphicon-education"></span></th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>ISBN</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Rise of the fallen</td>
+                                        <td>Breanna Ashacraft</td>
+                                        <td>Fantasy</td>
+                                        <td>1234-4573-179-3</td>
+                                        <td><button type="button" class="btn-sm btn-success btn-sm returnbtn">Return</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Borrowing brillance</td>
+                                        <td>David Kord Murry</td>
+                                        <td>Educational</td>
+                                        <td>8834-3573-179-3</td>
+                                        <td><button type="button" class="btn-sm btn-success btn-sm returnbtn">Return</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Learn and master guitar</td>
+                                        <td>Steve Krenz</td>
+                                        <td>Art and music</td>
+                                        <td>2234-4573-19-17</td>
+                                        <td><button type="button" class="btn-sm btn-success btn-sm returnbtn">Return</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="pa">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class=" col l12 col m10 col s9">
+                        <form class="form-signin" action="">
+                            <h3 class="sub-header form-signin-heading"> Personal Info</h3>
+                            <div class="input-field">
+                                <label for="firstname" class="sr-only">First Name</label>
+                                <input type="text" id="firstname" class="form-control validate" placeholder="First Name" required autofocus>
+                            </div>
+                            <div class="input-field">
+                                <label for="lastname" class="sr-only">Last Name</label>
+                                <input type="text" id="lastname" class="form-control validate" placeholder="Last Name" required autofocus>
+                            </div>
+                            <div class="input-field">
+                                <label for="inputSignUpEmail" class="sr-only">Email address</label>
+                                <input type="email" id="inputSignUpEmail" class="form-control validate" placeholder="Email address" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Phone number</label>
+                                <input type="number" class="form-control validate" placeholder="phone number" required autofocus>
+                            </div>
+                            <div class="input-field">
+                                <select class=" form-control " id="inlineFormCustomSelect" required autofocus>
+                                    <option value="" disabled selected>Membership Type</option>
+                                    <option value="1">Basic</option>
+                                    <option value="2">Silver</option>
+                                    <option value="3">Gold</option>
+                                </select>
+                            </div>
+                            <div class="file-field input-field">
+                                <div id="filebtn" style="background-color:grey" class="btn">
+                                    <span>File</span>
+                                    <input type="file" multiple>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" placeholder="Upload your picture">
+                                </div>
+                            </div>
+
+                            <div class="input-field inline">
+                                <button id="editbtn" style="background-color:#3d1112" type="button" class="btn btn-primary pbtn">Edit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="par">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class=" col l12 col m10 col s9">
+                        <h4 class="sub-header">Borrow History</h4>
+                        <div class="table-responsive">
+                            <table class="table responsive-table bordered highlight striped">
+                                <thead>
+                                    <tr>
+                                        <th><span class="glyphicon glyphicon-education"></span></th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Borrowed Date</th>
+                                        <th>Returned Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Rise of the fallen</td>
+                                        <td>Breanna Ashacraft</td>
+                                        <td>12-10-1998</td>
+                                        <td>14-10-1998</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Borrowing brillance</td>
+                                        <td>David Kord Murry</td>
+                                        <td>1-1-1999</td>
+                                        <td>5-1-1999</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/dashboard.js" type="text/javascript"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request
 from flask_restful import Api
 from resources.user import UserRegister, UserLogin
 from resources.borrowedbook import BorrowedBooks, BorrowedBooksList
@@ -40,5 +40,23 @@ def create_app(config_name):
 
         :return: Flask response
         """
-        return 'welcome to hello books!'
+        return render_template('index.html', error=request.args.get('error'))
+
+    @app.route('/signup')
+    def signup():
+        """
+        Render a Hello World response.
+
+        :return: Flask response
+        """
+        return render_template('signup.html', error=request.args.get('error'))
+
+    @app.route('/books')
+    def books_page():
+        """
+        Render a Hello World response.
+
+        :return: Flask response
+        """
+        return render_template('books.html')
     return app

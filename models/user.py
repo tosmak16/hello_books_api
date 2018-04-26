@@ -13,10 +13,10 @@ class UserModel(db.Model):
     email = db.Column(db.String(80), nullable=False)
 
     def __init__(self, **kwargs):
-        self.username = kwargs['username']
-        self.password = kwargs['password'].encode('utf-8')
-        self.email = kwargs['email']
-        self.name = kwargs['name']
+        self.username = kwargs['username'].lower()
+        self.password = kwargs['password']
+        self.email = kwargs['email'].lower()
+        self.name = kwargs['name'].title()
 
 
     @classmethod
