@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/vendor/materialize.min.css') }}" media="screen,projection"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Books Catalog</title>
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='styles/css/detail.css') }}" rel="stylesheet">
+</head>
+
+<body style="background-color:lightgoldenrodyellow;">
+    <div class="navbar-fixed">
+        <nav style="background-color: #3d1112">
+            <div class="nav-wrapper">
+                <div>
+                    <a id="hello" class="brand-logo" href="#"><i class="material-icons left"> collections</i>HelloBooks</a>
+                </div>
+                <div>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="books.html" style="color:wheat">Catalog</a></li>
+                        <li><a href="dashboard.html" style="color:wheat"><i class="material-icons left">account_circle</i>user@gmail.com</a></li>
+                        <li><a href="index.html" style="color:wheat"><i class="material-icons left">exit_to_app</i> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid ">
+        <div class="row">
+            <div id="sidenava" class="col m2 col l2 sidebar ">
+                <ul class="nav nav-sidebar">
+                    <li><a class="heada" href="#">SCIENCE & TECH</a></li>
+                    <li><a class="boda" href="#">Science</a></li>
+                    <li><a class="boda" href="#">Tech</a></li>
+                    <li><a class="boda" href="#">Computer</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a class="heada" href="">LIFE STYLE</a></li>
+                    <li><a class="boda" href="">Arts and Languages</a></li>
+                    <li><a class="boda" href="">Fashion and beauty</a></li>
+                    <li><a class="boda" href="">Food</a></li>
+                    <li><a class="boda" href="">Games</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a class="heada" href="">CAREER & MONEY</a></li>
+                    <li><a class="boda" href="">Management</a></li>
+                    <li><a class="boda" href="">Accounting</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col m10 offset-m2 col l10 offset-l2 col s12 main">
+                <h4 class="page-header">Latest Books</h4>
+                <hr style="border-color: #3d1112;">
+                <div class="row placeholders">
+                    <div class="col m5 col l3 col s12 placeholder ">
+                        <a href="detail.html"> <img class="materialboxed"  src="img/l1.jpg" width="150" height="200" alt="Generic placeholder thumbnail"></a>
+                        <h5>Abraham Lincoln</h5>
+                        <span class="text-muted">By Carl Sandburg</span>
+                    </div>
+                    <div class="col m5 col l3 col s12 placeholder">
+                        <a href="detail.html"> <img class="materialboxed" src="img/l2.jpg" width="150" height="200" alt="Generic placeholder thumbnail"></a>
+                        <h5>The Time Machine</h5>
+                        <span class="text-muted">By H. G. Wells</span>
+                    </div>
+                    <div class="col m5 col l3 col s12 placeholder">
+                        <a href="detail.html"> <img class="materialboxed" src="img/l3.jpg" width="150" height="200" alt="Generic placeholder thumbnail"></a>
+                        <h5>Little Boy Lost</h5>
+                        <span class="text-muted">By J.D Trafford</span>
+                    </div>
+                    <div class="col m5 col l3  col s12 placeholder">
+                        <a href="detail.html"> <img class="materialboxed" src="img/l4.jpg" width="150" height="200" alt="Generic placeholder thumbnail"></a>
+                        <h5>Undercover</h5>
+                        <span class="text-muted">By Danielle Steel</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="booksearchbar" class="container-fluid">
+                <form class="row">
+                    <div class="col l8  offset-l2  col m8  offset-m2  col s12 ">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            </div>
+                        </form>
+                        <hr style="border-color: #3d1112;">
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class=" col l9 offset-l2 col m9  offset-m2  col s9 offset-s2">
+                    <h3 class="sub-header">Available books</h3>
+                    <div class="responsive-table">
+                        <table class="table striped">
+                            <thead>
+                                <tr>
+                                    <th><i class="material-icons ">search</i></th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Category</th>
+                                    <th>ISBN</th>
+                                    <th>Number in stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td> <a href="detail.html"> Rise of the fallen</a></td>
+                                    <td>Breanna Ashacraft</td>
+                                    <td>Fantasy</td>
+                                    <td>1234-4573-179-3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td> <a href="detail.html">Borrowing brillance</a> </td>
+                                    <td>David Kord Murry</td>
+                                    <td>Educational</td>
+                                    <td>8834-3573-179-3</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td> <a href="detail.html"> Learn and master guitar</a></td>
+                                    <td>Steve Krenz</td>
+                                    <td>Art and music</td>
+                                    <td>2234-4573-19-17</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><a href="detail.html">Data-ism</a> </td>
+                                    <td>Steve Lohr</td>
+                                    <td>Tech</td>
+                                    <td>3324-473-129-33</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td> <a href="detail.html">Think and Grow Rich</a></td>
+                                    <td>Napoleon Hill</td>
+                                    <td>Business Success</td>
+                                    <td>1434-473-279-34</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+
+
+    <script src="js/script.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>
